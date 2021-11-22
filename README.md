@@ -2,16 +2,13 @@
 
 ## Introduction
 
-This is an implementation of TRAVEL, a graph-based GNN framework proposed in the following paper:
+This is an implementation of Traﬃc Accident Vulnerability Estimation via Linkage (TRAVEL), a graph-based GNN framework proposed in the following paper:
 
 [Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model].
 Baixiang Huang, Bryan Hooi.
 
-Please cite our paper if you use the datasets or code in this repo.
+Please cite our paper if you use the datasets in this repo.
 
-## Models
-
-The models are implemented in `accident_occurrence.ipynb` and `accident_severity.ipynb`.
 
 ## Datasets
 
