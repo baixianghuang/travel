@@ -2,17 +2,21 @@
 
 ## Introduction
 
-This is an implementation of Traﬃc Accident Vulnerability Estimation via Linkage (TRAVEL), a graph-based GNN framework proposed in the following paper:
+This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper:
 
 [Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model].
 Baixiang Huang, Bryan Hooi.
 
 Please cite our paper if you use the datasets in this repo.
 
+![alt text](https://baixianghuang.github.io/huangbx-site/wp-content/uploads/2021/11/paper-3.jpg)
+
 
 ## Datasets
 
-Datasets for 20 US cities are available in the directory `dataset_travel`.
+Datasets for 30 US cities are available in the directory `dataset_travel`. 
+
+Currently, this directory contains datasets for cities include: Houston, Charlotte, Dallas, Austin, Miami, Raleigh, Atlanta, Baton Rouge, Nashville, Orlando, Oklahoma City, Sacramento, Phoenix, Minneapolis, San Diego, Seattle, Richmond, San Antonio, Jacksonville, Saint Paul, Portland, San Jose, Columbia (South Carolina), Indianapolis, Greenville, Denver, Chicago, Tucson, Omaha, Tulsa
 
 The US-Accident dataset is available at https://smoosavi.org/datasets/us_accidents. 
 
