@@ -2,23 +2,37 @@
 
 ## Introduction
 
-This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper:
+<!-- This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper: -->
+This repo contains the graph-based traffic accident datasets proposed in the following paper:
 
 [Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model].
 Baixiang Huang, Bryan Hooi.
 
-Please cite our paper if you use the datasets in this repo.
-
-![alt text](https://baixianghuang.github.io/huangbx-site/wp-content/uploads/2021/11/paper-3.jpg)
-
+<!-- Please cite our paper if you use the datasets in this repo. -->
 
 ## Datasets
 
-Datasets for 30 US cities are available in the directory `dataset_travel`. 
+We build the datasets based on real-world road data from [OpenStreetMap](https://www.openstreetmap.org/) and the [US-Accident datasets](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset_travel`.
 
-Currently, this directory contains datasets for cities include: Houston, Charlotte, Dallas, Austin, Miami, Raleigh, Atlanta, Baton Rouge, Nashville, Orlando, Oklahoma City, Sacramento, Phoenix, Minneapolis, San Diego, Seattle, Richmond, San Antonio, Jacksonville, Saint Paul, Portland, San Jose, Columbia (South Carolina), Indianapolis, Greenville, Denver, Chicago, Tucson, Omaha, Tulsa
+Currently, we have released datasets for 50 US cities include Houston, Charlotte, Dallas, Austin, Miami, Raleigh, Atlanta, Baton Rouge, Nashville, Orlando, Oklahoma City, Sacramento, Phoenix, Minneapolis, San Diego, Seattle, Richmond, San Antonio, Jacksonville, Saint Paul, Portland, San Jose, Columbia (South Carolina), Indianapolis, Greenville, Denver, Chicago, Tucson, Omaha, Tulsa, Rochester, Tampa, Dayton, Detroit, Oakland, Riverside, Flint, Grand Rapids, Fort Lauderdale, Columbus, Bronx, Kansas City, Louisville, Long Beach, Salt Lake City, El Paso, Corona, Anaheim, St. Louis, San Francisco.
 
-The US-Accident dataset is available at https://smoosavi.org/datasets/us_accidents. 
+<!-- All city graphs are fully-connected, directed -->
+These benchmark datasets can be used for two kind of tasks: traffic accident occurrence prediction and accident severity prediction. For the accident occurrence prediction task, we use binary labels to indicate whether a node contains at least one accident. For the severity prediction task, severity is represented by a number between 0 and 7, where 0 denotes no accident, 1 indicates the most negligible impact on traffic, and 7 indicates a significant impact on traffic. All environmental features obtained from OpenStreetMap are preprocessed. 
+
+The table below shows the OpenStreetMap features included in our datasets.
+
+ Graph feature              | Description               
+----------------------------|------------------------------------------------
+ highway                    | The type of a road (tertiary, motorway, etc.). 
+ length                     | The length of a road.                          
+ bridge                     | Indicates whether a road represents a bridge.  
+ lanes                      | The number of lanes of a road.                 
+ oneway                     | Indicates whether a road is a one-way street.  
+ maxspeed                   | The maximum legal speed limit of a road.       
+ access                     | Describes restrictions on the use of a road.   
+ tunnel                     | Indicates whether a road runs in a tunnel.     
+ junction                   | Describes the junction type of a road.                    
+ street\_count              | The number of roads connected to a node.   
 
 The preprocessed TRAVEL datasets include:
 - `x`, the node features,
@@ -30,18 +44,13 @@ The preprocessed TRAVEL datasets include:
 - `coords`, the node coordinates,
 - `edge_index`, the graph indices.
 
-You can use the code below to load them.
+<!--  You can use the code below to load the datasets.
 ```python
 class TRAVELDataset(InMemoryDataset):
     r"""The TRAVEL datasets from the
     `". Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model" 
     <https://link>`_ paper.
     Nodes represent intersections or dead-end nodes and edges represent roads.
-    Datasets include 'houston', 'charlotte', 'dallas', 'austin', 'miami', 'raleigh', 
-    'atlanta', 'baton_rouge', 'nashville', 'orlando', 'oklahoma_city', 'sacramento', 
-    'phoenix', 'minneapolis', 'san_diego', 'seattle', 'richmond', 'san_antonio', 
-    'jacksonville', 'saint_paul'
-
     Args:
         root (string): Root directory where the dataset should be saved.
         name (string): The name of the dataset.
@@ -94,9 +103,9 @@ class TRAVELDataset(InMemoryDataset):
 
 
 TRAVELDataset('file_path', city_name)
-```
+``` -->
 
-In addition, raw features are also provided. 
+In addition, raw features can be found in our [Google Drive](https://drive.google.com/drive/folders/1dmWRkFhZvIjiMAeLNMzZsylI5i6i7bur?usp=sharing)
 ```python
 # Raw node features include 'y', 'x', 'street_count', 'highway', 'ref', 'geometry', 'accident_cnt', 'severity', 'start_time', 'end_time'
 with open('your_file_path/'+city_name+'_raw_node_attr.pkl', 'rb') as fp:
