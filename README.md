@@ -12,11 +12,10 @@ Baixiang Huang, Bryan Hooi.
 
 ## Datasets
 
-We build the datasets based on real-world road data from [OpenStreetMap](https://www.openstreetmap.org/) and the [US-Accident datasets](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset_travel`.
+We build the datasets based on real-world road data from [OpenStreetMap](https://www.openstreetmap.org/) and the US-Accident datasets [Moosavi et al., 2019](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset_travel`.
 
 Currently, we have released datasets for 50 US cities include Houston, Charlotte, Dallas, Austin, Miami, Raleigh, Atlanta, Baton Rouge, Nashville, Orlando, Oklahoma City, Sacramento, Phoenix, Minneapolis, San Diego, Seattle, Richmond, San Antonio, Jacksonville, Saint Paul, Portland, San Jose, Columbia (South Carolina), Indianapolis, Greenville, Denver, Chicago, Tucson, Omaha, Tulsa, Rochester, Tampa, Dayton, Detroit, Oakland, Riverside, Flint, Grand Rapids, Fort Lauderdale, Columbus, Bronx, Kansas City, Louisville, Long Beach, Salt Lake City, El Paso, Corona, Anaheim, St. Louis, San Francisco.
 
-<!-- All city graphs are fully-connected, directed -->
 These benchmark datasets can be used for two kind of tasks: traffic accident occurrence prediction and accident severity prediction. For the accident occurrence prediction task, we use binary labels to indicate whether a node contains at least one accident. For the severity prediction task, severity is represented by a number between 0 and 7, where 0 denotes no accident, 1 indicates the most negligible impact on traffic, and 7 indicates a significant impact on traffic. All environmental features obtained from OpenStreetMap are preprocessed. 
 
 The table below shows the OpenStreetMap features included in our datasets.
@@ -34,15 +33,15 @@ The table below shows the OpenStreetMap features included in our datasets.
  junction                   | Describes the junction type of a road.                    
  street\_count              | The number of roads connected to a node.   
 
-The preprocessed TRAVEL datasets include:
-- `x`, the node features,
-- `y`, the labels for the traffic accident occurrence prediction task,
-- `severity_labels`, the labels for the traffic accident severity prediction task,
-- `edge_attr`, the edge features,
-- `edge_attr_dir`, the directional edge features,
-- `edge_attr_ang`, the angular edge features,
-- `coords`, the node coordinates,
-- `edge_index`, the graph indices.
+Each dataset contains a single, directed road garph. Each road network is described by an instance of 'torch_geometric.data.Data', which include following attributes:
+- `x`: Node feature matrix with shape `[num_nodes, num_node_features]`
+- `y`: Node-level labels for the traffic accident occurrence prediction task
+- `severity_labels`: Node-level labels for the traffic accident severity prediction task
+- `edge_attr`: Edge feature matrix with shape `[num_edges, num_edge_features]`
+- `edge_attr_dir`: Directional edge feature matrix with shape [num_edges, 2]
+- `edge_attr_ang`: Angular edge feature matrix with shape [num_edges, 3]
+- `coords`: Node coordinates
+- `edge_index`: Graph indices in COO format (coordinate format) with shape [2, num_edges] and type torch.long
 
 <!--  You can use the code below to load the datasets.
 ```python
