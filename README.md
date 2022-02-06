@@ -13,7 +13,7 @@ Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TR
 
 We build the datasets based on real-world road data from [OpenStreetMap](https://www.openstreetmap.org/) and the US-Accident datasets [(Moosavi et al., 2019)](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset`.
 
-Currently, we have released datasets for 1,000 US cities include Los Angeles (CA), Houston (TX), Charlotte (NC), Dallas (TX), Austin (TX), Miami (FL), Raleigh (NC), Nashville (TN), New York City (NY)... The table below shows the statistics of 100 major US cities.
+Currently, we have released datasets for 1,000 US cities. The table below shows the statistics of 100 major US cities.
 
 These benchmark datasets can be used for two kind of tasks: traffic accident occurrence prediction and accident severity prediction. For the accident occurrence prediction task, we use binary labels to indicate whether a node contains at least one accident. For the severity prediction task, severity is represented by a number between 0 and 7, where 0 denotes no accident, 1 indicates the most negligible impact on traffic, and 7 indicates a significant impact on traffic. All environmental features obtained from OpenStreetMap are preprocessed. 
 
