@@ -1,4 +1,4 @@
-# TRAVEL
+# Traffic Accident Prediction
 
 ## Introduction
 
@@ -145,13 +145,10 @@ Each dataset contains a single, directed road garph. Each road network is descri
 - `coords`: Node coordinates
 - `edge_index`: Graph indices in COO format (coordinate format) with shape `[2, num_edges]` and type torch.long
 
-<!--  You can use the code below to load the datasets.
+ You can use the code below to load the datasets.
 ```python
 class TRAVELDataset(InMemoryDataset):
-    r"""The TRAVEL datasets from the
-    `". Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model" 
-    <https://link>`_ paper.
-    Nodes represent intersections or dead-end nodes and edges represent roads.
+    r"""
     Args:
         root (string): Root directory where the dataset should be saved.
         name (string): The name of the dataset.
@@ -203,8 +200,8 @@ class TRAVELDataset(InMemoryDataset):
         return f'{self.name.capitalize()}Full()'
 
 
-TRAVELDataset('file_path', city_name)
-``` -->
+TRAVELDataset('file_path', 'Dallas_TX')
+```
 
 In addition, raw features can be found in our [Google Drive](https://drive.google.com/drive/folders/1dmWRkFhZvIjiMAeLNMzZsylI5i6i7bur?usp=sharing)
 ```python
