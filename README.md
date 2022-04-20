@@ -3,20 +3,50 @@
 ## Introduction
 
 <!-- This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper: -->
-This repo contains the graph-based traffic accident datasets proposed in the following paper:
+This repo contains the Traffic Accident Benchmark (TAB-1k) datasets proposed in the following paper:
 
 Traffic Accident Prediction using Graph Neural Networks: New Datasets and the TRAVEL Model. Baixiang Huang, Bryan Hooi.
 
-<!-- Please cite our paper if you use the datasets in this repo. -->
+Please cite our paper if you use the datasets in this repo.
 
 ## Datasets
 
-We build the datasets based on real-world road data from [OpenStreetMap](https://www.openstreetmap.org/) and the US-Accident datasets [(Moosavi et al., 2019)](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset`.
-
-Currently, we have released datasets for 1,000 US cities. The table below shows the statistics of 100 major US cities.
+This is a new set of Traffic Accident Benchmark (TAB-1k) for one thousand US cities. We build the datasets based on real-world geospatial data from [OpenStreetMap](https://www.openstreetmap.org/) and the US-Accident datasets [(Moosavi et al., 2019)](https://arxiv.org/abs/1909.09638). Datasets are available in the directory `dataset`.
 
 These benchmark datasets can be used for two kind of tasks: traffic accident occurrence prediction and accident severity prediction. For the accident occurrence prediction task, we use binary labels to indicate whether a node contains at least one accident. For the severity prediction task, severity is represented by a number between 0 and 7, where 0 denotes no accident, 1 indicates the most negligible impact on traffic, and 7 indicates a significant impact on traffic. All environmental features obtained from OpenStreetMap are preprocessed. 
 
+The table below shows the OpenStreetMap features included in our datasets. Note that accident coordinates and timestamps are also included in the datasets.
+
+ Graph feature              | Description               
+----------------------------|------------------------------------------------
+ highway                    | The type of a road (tertiary, motorway, etc.). 
+ length                     | The length of a road.                          
+ bridge                     | Indicates whether a road represents a bridge.  
+ lanes                      | The number of lanes of a road.                 
+ oneway                     | Indicates whether a road is a one-way street.  
+ maxspeed                   | The maximum legal speed limit of a road.       
+ access                     | Describes restrictions on the use of a road.   
+ tunnel                     | Indicates whether a road runs in a tunnel.     
+ junction                   | Describes the junction type of a road.                    
+ street\_count              | The number of roads connected to a node.   
+
+Each dataset contains a single, directed road garph. Each road network is described by an instance of 'torch_geometric.data.Data', which include following attributes:
+- `x`: Node feature matrix with shape `[num_nodes, num_node_features]`
+- `y`: Node-level labels for the traffic accident occurrence prediction task
+- `severity_labels`: Node-level labels for the traffic accident severity prediction task
+- `edge_attr`: Edge feature matrix with shape `[num_edges, num_edge_features]`
+- `edge_attr_dir`: Directional edge feature matrix with shape `[num_edges, 2]`
+- `edge_attr_ang`: Angular edge feature matrix with shape `[num_edges, 3]`
+- `coords`: Node coordinates
+- `edge_index`: Graph indices in COO format (coordinate format) with shape `[2, num_edges]` and type torch.long
+
+List of 1k cities sorted by their total counts of traffic accident occurrences.
+```python
+with open('util/cities_sorted_by_accident.pkl', 'rb') as fp:
+    cities_sorted_by_accident = pickle.load(fp)
+```
+
+The table below shows the statistics of top 50 cities.
 | City                  | # nodes | # edges | Avg node  degree | % accident  nodes |
 |-----------------------|:-------:|:-------:|:----------------:|:-----------------:|
 | Los Angeles (CA)      |  49713  |  136742 |       2.75       |       12.46       |
@@ -69,84 +99,15 @@ These benchmark datasets can be used for two kind of tasks: traffic accident occ
 | St. Louis (MO)        |   8848  |  24267  |       2.74       |        7.29       |
 | San Francisco (CA)    |   9577  |  26694  |       2.79       |        9.95       |
 | Corona (CA)           |   3724  |   9257  |       2.49       |        6.87       |
-| Fort Worth (TX)       |  29846  |  77583  |        2.6       |        5.11       |
-| Kansas City (MO)      |  22175  |  56955  |       2.57       |        6.02       |
-| Philadelphia (PA)     |  24870  |  61518  |       2.47       |        5.32       |
-| Ontario (CA)          |   3976  |  10127  |       2.55       |        8.73       |
-| Birmingham (AL)       |  11298  |  31302  |       2.77       |       10.09       |
-| Memphis (TN)          |  23986  |  63006  |       2.63       |        9.12       |
-| Bakersfield (CA)      |  11959  |  29276  |       2.45       |        5.28       |
-| Spartanburg (SC)      |   1853  |   4863  |       2.62       |       14.03       |
-| Augusta (GA)          |   9395  |  23450  |        2.5       |       21.05       |
-| Cincinnati (OH)       |   8190  |  20287  |       2.48       |       15.21       |
-| New Orleans (LA)      |  15266  |  39961  |       2.62       |       15.99       |
-| Whittier (CA)         |   1846  |   4860  |       2.63       |        8.56       |
-| Lafayette (LA)        |   6054  |  15882  |       2.62       |       27.65       |
-| Milwaukee (WI)        |  14382  |  38866  |        2.7       |       12.37       |
-| Fresno (CA)           |  14968  |  38189  |       2.55       |        5.94       |
-| Saint Petersburg (FL) |   9246  |  26709  |       2.89       |       17.72       |
-| Hialeah (FL)          |   3542  |  10229  |       2.89       |        7.14       |
-| Hayward (CA)          |   3345  |   8187  |       2.45       |        9.9        |
-| Fort Myers (FL)       |   3160  |   7887  |        2.5       |       11.39       |
-| Santa Clarita (CA)    |   6801  |  15073  |       2.22       |        4.88       |
-| Pittsburgh (PA)       |   9176  |  23818  |        2.6       |       14.22       |
-| Boston (MA)           |  11007  |  25350  |        2.3       |       20.28       |
-| Shreveport (LA)       |   8591  |  23059  |       2.68       |       23.69       |
-| York (PA)             |   1226  |   3497  |       2.85       |       44.37       |
-| Lancaster (PA)        |   788   |   2043  |       2.59       |       62.18       |
-| Baldwin Park (CA)     |   1096  |   2663  |       2.43       |       14.05       |
-| Cleveland (OH)        |   9029  |  24873  |       2.75       |        17.6       |
-| West Palm Beach (FL)  |   2987  |   7792  |       2.61       |       21.39       |
-| Anderson (SC)         |   1682  |   4646  |       2.76       |       14.03       |
-| Washington (DC)       |   9928  |  26850  |        2.7       |       18.32       |
-| Tracy (CA)            |   2786  |   6714  |       2.41       |        4.38       |
-| Irvine (CA)           |   7779  |  17651  |       2.27       |        5.54       |
-| Sarasota (FL)         |   2529  |   6574  |        2.6       |       10.68       |
-| Chattanooga (TN)      |   9327  |  24444  |       2.62       |       14.72       |
-| Gardena (CA)          |   827   |   2253  |       2.72       |        12.7       |
-| Bradenton (FL)        |   1790  |   4854  |       2.71       |        9.66       |
-| Fremont (CA)          |   6934  |  16014  |       2.31       |        5.7        |
-| Stockton (CA)         |   7437  |  19555  |       2.63       |        7.21       |
-| Providence (RI)       |   4688  |  12904  |       2.75       |        8.06       |
-| Colorado Springs (CO) |  20223  |  49956  |       2.47       |        7.61       |
-| Pomona (CA)           |   2882  |   7480  |        2.6       |       12.42       |
-| Hollywood (FL)        |   3758  |  10203  |       2.72       |        9.39       |
-| Pensacola (FL)        |   3494  |   9950  |       2.85       |        8.21       |
-| Baltimore (MD)        |  12543  |  31962  |       2.55       |       10.16       |
-| Elgin (IL)            |   2915  |   8041  |       2.76       |       31.56       |
-| Tempe (AZ)            |   4708  |  11890  |       2.53       |       14.93       |
-| Norfolk (VA)          |   8454  |  22123  |       2.62       |        8.59       |
-| Santa Rosa (CA)       |   5477  |  13673  |        2.5       |        6.48       |
-| Livermore (CA)        |   3509  |   8686  |       2.48       |        5.67       |
-| Myrtle Beach (SC)     |   2612  |   6692  |       2.56       |        8.27       |
 
-The table below shows the OpenStreetMap features included in our datasets.
-
- Graph feature              | Description               
-----------------------------|------------------------------------------------
- highway                    | The type of a road (tertiary, motorway, etc.). 
- length                     | The length of a road.                          
- bridge                     | Indicates whether a road represents a bridge.  
- lanes                      | The number of lanes of a road.                 
- oneway                     | Indicates whether a road is a one-way street.  
- maxspeed                   | The maximum legal speed limit of a road.       
- access                     | Describes restrictions on the use of a road.   
- tunnel                     | Indicates whether a road runs in a tunnel.     
- junction                   | Describes the junction type of a road.                    
- street\_count              | The number of roads connected to a node.   
-
-Each dataset contains a single, directed road garph. Each road network is described by an instance of 'torch_geometric.data.Data', which include following attributes:
-- `x`: Node feature matrix with shape `[num_nodes, num_node_features]`
-- `y`: Node-level labels for the traffic accident occurrence prediction task
-- `severity_labels`: Node-level labels for the traffic accident severity prediction task
-- `edge_attr`: Edge feature matrix with shape `[num_edges, num_edge_features]`
-- `edge_attr_dir`: Directional edge feature matrix with shape `[num_edges, 2]`
-- `edge_attr_ang`: Angular edge feature matrix with shape `[num_edges, 3]`
-- `coords`: Node coordinates
-- `edge_index`: Graph indices in COO format (coordinate format) with shape `[2, num_edges]` and type torch.long
-
- You can use the code below to load the datasets.
+You can use the code below to load the datasets.
 ```python
+import torch
+import numpy as np
+import os.path as osp
+from typing import Union, Tuple, Callable, Optional
+from torch_geometric.data import Data, DataLoader, InMemoryDataset, download_url
+          
 class TRAVELDataset(InMemoryDataset):
     r"""
     Args:
@@ -199,8 +160,37 @@ class TRAVELDataset(InMemoryDataset):
     def __repr__(self) -> str:
         return f'{self.name.capitalize()}Full()'
 
+def read_npz(path):
+    with np.load(path, allow_pickle=True) as f:
+        return parse_npz(f)
 
-TRAVELDataset('file_path', 'Dallas_TX')
+
+def parse_npz(f):
+    x = torch.from_numpy(f['x']).to(torch.float)
+    y = torch.from_numpy(f['y']).to(torch.long)
+    edge_attr = torch.from_numpy(f['edge_attr']).to(torch.float)
+    edge_index = torch.from_numpy(f['edge_index']).to(torch.long).t().contiguous()
+    edge_attr_dir = torch.from_numpy(f['edge_attr_dir']).to(torch.float)
+    edge_attr_ang = torch.from_numpy(f['edge_attr_ang']).to(torch.float)
+    coords = torch.from_numpy(f['coordinates']).to(torch.float)
+    severity_labels = torch.from_numpy(f['severity_labels']).to(torch.long)
+    return Data(x=x, y=y, edge_index=edge_index, edge_attr=edge_attr, 
+                edge_attr_dir=edge_attr_dir, edge_attr_ang=edge_attr_ang, 
+                coords=coords, severity_labels=severity_labels)
+
+
+dataset = TRAVELDataset('file_path', 'Dallas_TX')
+data = dataset[0]
+print(f'Number of graphs: {len(dataset)}')
+print(f'Number of node features: {dataset.num_features}')
+print(f'Number of edge features: {dataset.num_edge_features}')
+print(f'Number of classes: {dataset.num_classes}')
+print(f'Number of nodes: {data.num_nodes}')
+print(f'Number of edges: {data.num_edges}')
+print(f'Average node degree: {data.num_edges / data.num_nodes:.2f}')
+print(f'Contains isolated nodes: {data.has_isolated_nodes()}')
+print(f'Contains self-loops: {data.has_self_loops()}')
+print(f'Is undirected: {data.is_undirected()}')
 ```
 
 In addition, raw features can be found in our [Google Drive](https://drive.google.com/drive/folders/1dmWRkFhZvIjiMAeLNMzZsylI5i6i7bur?usp=sharing)
