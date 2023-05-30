@@ -1,18 +1,18 @@
-# Traffic Accident Prediction
+# TAP: Traffic Accident Prediction
+
 
 ## Introduction
-
 <!-- This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper: -->
 This repo contains the Traffic Accident Prediction (TAP) datasets proposed in the following paper:
 
-TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Transportation Networks. Baixiang Huang, Bryan Hooi, Kai Shu.
-<!-- Please cite our paper if you use the datasets in this repo. -->
+TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. Baixiang Huang, Bryan Hooi, Kai Shu.
+Huang, Baixiang, Bryan Hooi, and Kai Shu. [link](https://arxiv.org/pdf/2304.08640)
+
 
 ## Datasets
-
 The Traffic Accident Prediction (TAP) data repository offers extensive coverage for 1,000 US cities (TAP-city) and 49 states (TAP-state), providing real-world road structure data that can be easily used for graph-based machine learning methods such as Graph Neural Networks. Additionally, it features multi-dimensional geospatial attributes, including angular and directional features, that are useful for analyzing transportation networks. The TAP repository has the potential to benefit the research community in various applications, including traffic crash prediction, road safety analysis, and traffic crash mitigation. The datasets can be accessed in the TAP-city and TAP-state directories.
 
-For example, this repository can aid in traffic accident occurrence prediction and accident severity prediction. Binary labels are used to indicate whether a node contains at least one accident for the occurrence prediction task, while severity is represented by a number between 0 and 7 for the severity prediction task. A severity level of 0 denotes no accident, and 1 to 7 represent increasingly significant impacts on traffic.
+For example, this repository can aid in traffic accident occurrence prediction and accident severity prediction. Binary labels are used to indicate whether a node contains at least one accident for the occurrence prediction task, while severity is represented by a number between 0 and 7 for the severity prediction task. A severity level of 0 denotes no accident, and 1 to 7 represents increasingly significant impacts on traffic.
 
 The table below shows the features included in our datasets. 
 
@@ -44,6 +44,16 @@ List of 1,000 cities sorted by their total counts of traffic accident occurrence
 ```python
 with open('util/cities_sorted_by_accident.pkl', 'rb') as fp:
     cities_sorted_by_accident = pickle.load(fp)
+```
+
+
+### Enivorment
+Run the following commands to create an environment and install all the required packages:
+```bash
+conda config --prepend channels conda-forge
+conda create -n tap --strict-channel-priority osmnx
+conda activate tap
+pip install -r requirements.txt
 ```
 
 
@@ -143,5 +153,20 @@ print(f'Contains self-loops: {data.has_self_loops()}')
 print(f'Is undirected: {data.is_undirected()}')
 ```
 
-State-level datasets with size over 100MB are stored in [Google Drive](https://drive.google.com/drive/folders/1tgxbEgnuFAAi1VMg4fTn-m1LA4Zbex4m?usp=sharing)
+State-level datasets with size over 100 MB are stored in [Google Drive](https://drive.google.com/drive/folders/1tgxbEgnuFAAi1VMg4fTn-m1LA4Zbex4m?usp=sharing)
 
+Please note that we do not have ownership of the data and therefore cannot provide a license or control its use. However, we kindly request that the data only be used for research purposes.
+
+
+## Citation
+```
+@article{huang2023tap,
+  title={TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks},
+  author={Huang, Baixiang and Hooi, Bryan and Shu, Kai},
+  journal={arXiv preprint arXiv:2304.08640},
+  year={2023}
+}
+```
+
+## License
+LUAR is distributed under the terms of the Apache License (Version 2.0).
