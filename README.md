@@ -8,6 +8,15 @@ This repo contains the Traffic Accident Prediction (TAP) datasets proposed in th
 TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. Baixiang Huang, Bryan Hooi, Kai Shu.
 Huang, Baixiang, Bryan Hooi, and Kai Shu. [link](https://arxiv.org/pdf/2304.08640)
 
+```
+@article{huang2023tap,
+  title={TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks},
+  author={Huang, Baixiang and Hooi, Bryan and Shu, Kai},
+  journal={arXiv preprint arXiv:2304.08640},
+  year={2023}
+}
+```
+
 
 ## Datasets
 The Traffic Accident Prediction (TAP) data repository offers extensive coverage for 1,000 US cities (TAP-city) and 49 states (TAP-state), providing real-world road structure data that can be easily used for graph-based machine learning methods such as Graph Neural Networks. Additionally, it features multi-dimensional geospatial attributes, including angular and directional features, that are useful for analyzing transportation networks. The TAP repository has the potential to benefit the research community in various applications, including traffic crash prediction, road safety analysis, and traffic crash mitigation. The datasets can be accessed in the TAP-city and TAP-state directories.
@@ -50,11 +59,12 @@ with open('util/cities_sorted_by_accident.pkl', 'rb') as fp:
 ### Enivorment
 Run the following commands to create an environment and install all the required packages:
 ```bash
-conda config --prepend channels conda-forge
+conda create --name <env> --file requirements.txt
+```
+<!-- conda config --prepend channels conda-forge
 conda create -n tap --strict-channel-priority osmnx
 conda activate tap
-pip install -r requirements.txt
-```
+pip install -r requirements.txt -->
 
 
 You can use the code below to load the datasets.
@@ -158,15 +168,5 @@ State-level datasets with size over 100 MB are stored in [Google Drive](https://
 Please note that we do not have ownership of the data and therefore cannot provide a license or control its use. However, we kindly request that the data only be used for research purposes.
 
 
-## Citation
-```
-@article{huang2023tap,
-  title={TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks},
-  author={Huang, Baixiang and Hooi, Bryan and Shu, Kai},
-  journal={arXiv preprint arXiv:2304.08640},
-  year={2023}
-}
-```
-
-## License
-LUAR is distributed under the terms of the Apache License (Version 2.0).
+<!-- ## License
+TAP is distributed under the terms of the Apache License (Version 2.0). -->
