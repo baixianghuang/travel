@@ -59,8 +59,9 @@ with open('util/cities_sorted_by_accident.pkl', 'rb') as fp:
 ### Enivorment
 Run the following commands to create an environment and install all the required packages:
 ```bash
-conda create --name <env> --file requirements.txt
+conda env create -f environment.yml
 ```
+In addition, you can access and run the code from Google Colab: [occurrence_task](https://colab.research.google.com/drive/13VpVN3fKupaYsieDRYBSxqkUdeGyEK-t?usp=sharing) and [severity_task](https://colab.research.google.com/drive/1AjO2BKqWdbLgXO4ObwOa0AF_fRYlfSFj?usp=sharing).
 <!-- conda config --prepend channels conda-forge
 conda create -n tap --strict-channel-priority osmnx
 conda activate tap
