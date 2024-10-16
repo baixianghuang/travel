@@ -5,8 +5,7 @@
 <!-- This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper: -->
 This repo contains the Traffic Accident Prediction (TAP) datasets proposed in the following paper:
 
-TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. Baixiang Huang, Bryan Hooi, Kai Shu.
-Huang, Baixiang, Bryan Hooi, and Kai Shu. [link](https://arxiv.org/pdf/2304.08640)
+TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. Baixiang Huang, Bryan Hooi, Kai Shu. [link](https://arxiv.org/pdf/2304.08640)
 
 ```
 @article{huang2023tap,
@@ -166,7 +165,7 @@ print(f'Is undirected: {data.is_undirected()}')
 
 State-level datasets with size over 100 MB are stored in [Google Drive](https://drive.google.com/drive/folders/1tgxbEgnuFAAi1VMg4fTn-m1LA4Zbex4m?usp=sharing)
 
-Please note that we do not have ownership of the data and therefore cannot provide a license or control its use. However, we kindly request that the data only be used for research purposes.
+Please note that we do not have ownership of the data and therefore not in a position to provide a license or control its use. However, we kindly request that the data only be used for research purposes.
 
 
 <!-- ## License
