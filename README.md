@@ -5,7 +5,7 @@
 <!-- This is an implementation of Traffic Accident Vulnerability Estimation via Linkage (TRAVEL), a graph neural network framework proposed in the following paper: -->
 This repo contains the Traffic Accident Prediction (TAP) datasets proposed in the following paper:
 
-TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. Baixiang Huang, Bryan Hooi, Kai Shu. [link](https://arxiv.org/pdf/2304.08640)
+TAP: A Comprehensive Data Repository for Traffic Accident Prediction in Road Networks. *ACM SIGSPATIAL* (2023) [link](https://arxiv.org/pdf/2304.08640)
 
 ```
 @article{huang2023tap,
@@ -47,6 +47,10 @@ Each dataset contains a single, directed road garph. Each road network is descri
 - `coords`: Node coordinates
 - `crash_time`: Start and end timestamps for traffic accidents with shape `[2, num_nodes]`
 - `edge_index`: Graph indices in COO format (coordinate format) with shape `[2, num_edges]` and type torch.long
+
+
+Please refer to `code/detailed_node_and_edge_features.ipynb` for the detailed feature names corresponding to each feature in `x` and `edge_attr`.
+
 
 List of 1,000 cities sorted by their total counts of traffic accident occurrences.
 ```python
